@@ -1,0 +1,145 @@
+<!doctype html>
+<!--
+@license
+Copyright 2015 See the CONTRIBUTORS.txt file
+
+    ("http://LM450N.github.io/poly-badge/CONTRIBUTORS.txt")
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<html lang="">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>poly-badge</title>
+
+  <script src="../../webcomponentsjs/webcomponents.js"></script>
+  <script src="../../web-component-tester/browser.js"></script>
+  <link rel="import" href="../poly-badge.html">
+
+</head>
+<body>
+
+  <template id="default">
+    <poly-badge>5</poly-badge>
+  </template>
+
+  <template id="marker">
+    <poly-badge info></poly-badge>
+  </template>
+
+  <script>
+
+    /**
+     * Clone an element then append it into the DOM
+     * @param  string templateId
+     */
+    function cloneAndAppendTemplate(templateId) {
+      var tmpl = document.getElementById(templateId);
+      var frag = document.importNode(tmpl.content, true);
+      var node = frag.children[0];
+      document.body.appendChild(node);
+      return node;
+    }
+
+    /**
+     * Test the marker content asynchronously
+     * @param  string excepted value
+     * @param  poly-badge marker   badge to test
+     */
+    function assertMarker (excepted, marker) {
+      flush(function() {
+        setTimeout(function() {
+          assert.equal(excepted, marker.textContent.trim());
+          done();
+        }, 600);
+      });
+    }
+
+    suite('content', function () {
+      test('in default tag is kept', function () {
+        var badge = cloneAndAppendTemplate('default');
+        assert.equal('5', badge.textContent);
+      });
+
+      test('in info marker is "INFO"', function () {
+        var badge = cloneAndAppendTemplate('marker');
+        badge.info = true;
+        badge.textContent = 'Yolo';
+        assertMarker('INFO', badge);
+      })
+
+      test('in warning marker is "WARNING"', function () {
+        var badge = cloneAndAppendTemplate('marker');
+        badge.warning = true;
+        assertMarker('WARNING', badge);
+      })
+
+      test('in error marker is "ERROR"', function () {
+        var badge = cloneAndAppendTemplate('marker');
+        badge.error = true;
+        assertMarker('ERROR', badge);
+      })
+
+      test('in a marker cannot be changed', function () {
+        var badge = cloneAndAppendTemplate('marker');
+        badge.warning = true;
+        badge.textContent = 'Content Changed';
+        assertMarker('WARNING', marker);
+      })
+    });
+
+    suite('shadow', function () {
+      test('is set to 0 by default', function () {
+        var badge = cloneAndAppendTemplate('default');
+        assert.equal(0, badge.shadowRoot.querySelector('paper-shadow').z);
+      })
+
+      test('raised can be changed', function () {
+        var badge = cloneAndAppendTemplate('default');
+        badge.raised = 1;
+        flush(function() {
+          setTimeout(function() {
+            assert.equal(1, badge.shadowRoot.querySelector('paper-shadow').z);
+            done();
+          }, 600);
+        });
+      })
+    });
+
+    suite('color', function () {
+      test('text can be changed', function () {
+        var badge = cloneAndAppendTemplate('default');
+        var defaultColor = badge.color;
+        badge.color = 'deeppink';
+        assert.notOk(
+          defaultColor,
+          badge.shadowRoot.querySelector('paper-shadow').color
+        );
+      })
+
+      test('background can be changed', function () {
+        var badge = cloneAndAppendTemplate('default');
+        var defaultBg = badge.bgc;
+        badge.bgc = 'deeppink';
+        assert.notOk(
+          defaultBg,
+          badge.shadowRoot.querySelector('paper-shadow').style.backgroundColor
+        );
+      })
+    });
+
+  </script>
+
+</body>
+</html>

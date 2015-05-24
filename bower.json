@@ -1,0 +1,27 @@
+{
+  "name": "poly-badge",
+  "version": "0.1.0",
+  "contributors": [
+    "http://LM450N.github.io/poly-badge/CONTRIBUTORS.txt"
+  ],
+  "description": "Little badge element based on Polymer.",
+  "license": "http://LM450N.github.io/poly-badge/LICENSE.txt",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LM450N/poly-badge.git"
+  },
+  "keywords": [
+    "seed",
+    "polymer",
+    "web-components",
+    "badge"
+  ],
+  "main": "poly-badge.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^0.5.4",
+    "paper-shadow": "Polymer/paper-shadow#~0.5.6"
+  },
+  "devDependencies": {
+    "web-component-tester": "Polymer/web-component-tester#^2.2.3"
+  }
+}
