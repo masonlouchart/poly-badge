@@ -31,6 +31,8 @@ Little badge element based on Polymer.
     <poly-badge raised="1">Shadow is added</poly-badge>
     <poly-badge info></poly-badge>
     <poly-badge color="white" bgc="black">Black & White</poly-badge>
+    <poly-badge tshadow>Text Shadow</poly-badge>
+    <poly-badge tshadow="1px 1px black">Text Shadow</poly-badge>
 
 @element poly-badge
 @blurb Little badge element based on Polymer.
@@ -62,6 +64,10 @@ Little badge element based on Polymer.
     .wide {
       border-radius: inherit;
       padding: 2px 4px;
+    }
+
+    .tshadow {
+      text-shadow: 1px 1px rgba(200, 200, 200, 0.50);
     }
 
     .info,
@@ -111,6 +117,15 @@ Little badge element based on Polymer.
          * @default 0
          */
         raised: 0,
+
+        /**
+         * Set the Text-shadow hight level
+         * 
+         * @attribute hight
+         * @type integer
+         * @default false
+         */
+        tshadow: false,
 
         /**
          * Set the badge like an info marker. Small font size, white on
@@ -171,7 +186,7 @@ Little badge element based on Polymer.
         _label: 'error && "ERROR" || warning && "WARNING" || info && "INFO"',
         _isMarker: '_label ? true : false',
         _classes: '{wide:wide, rounded:!wide, info:info, warning:warning,\
-          error:error, raised:raised} | tokenList'
+          error:error, raised:raised, tshadow:tshadow} | tokenList'
       },
 
       attached: function () {
@@ -194,6 +209,13 @@ Little badge element based on Polymer.
 
       raisedChanged: function (oldValue, newValue) {
         this.shadowRoot.querySelector('paper-shadow').setZ(newValue);
+      },
+
+      tshadowChanged: function(oldValue, newValue) {
+        if (!this._isMarker) {
+          this.shadowRoot.querySelector('paper-shadow')
+            .style.setProperty('text-shadow', newValue);
+        }
       }
 
     })
