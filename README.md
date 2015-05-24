@@ -32,6 +32,8 @@ See the [Component Page](http://louchart-mason.fr/poly-badge)
 	<poly-badge raised="1">Shadow is added</poly-badge>
 	<poly-badge info></poly-badge>
 	<poly-badge color="white" bgc="black">Black & White</poly-badge>
+	<poly-badge tshadow>Text Shadow activate</poly-badge>
+	<poly-badge tshadow="1px 1px black">Text Shadow edit</poly-badge>
 	...
 	```
 
@@ -46,6 +48,7 @@ Attribute | Description
 `error`   | Is an error marker
 `color`   | Set the text color
 `bgc`     | Set the background color
+`tshadow` | Set the text shadow
 
 **There are no required options!**
 
