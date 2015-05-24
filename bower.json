@@ -1,11 +1,13 @@
 {
   "name": "poly-badge",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "authors": ["Mason Louchart"],
   "contributors": [
-    "http://LM450N.github.io/poly-badge/CONTRIBUTORS.txt"
+    "http://LM450N.github.io/poly-badge/components/poly-badge/CONTRIBUTORS.txt"
   ],
   "description": "Little badge element based on Polymer.",
-  "license": "http://LM450N.github.io/poly-badge/LICENSE.txt",
+  "license": "http://LM450N.github.io/poly-badge/components/poly-badge/LICENSE.txt",
+  "homepage": "http://LM450N.github.io/poly-badge/components/poly-badge/",
   "repository": {
     "type": "git",
     "url": "https://github.com/LM450N/poly-badge.git"
@@ -23,5 +25,12 @@
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^2.2.3"
-  }
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
 }

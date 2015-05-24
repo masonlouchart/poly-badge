@@ -11,13 +11,19 @@ See the [Component Page](http://louchart-mason.fr/poly-badge)
 
 ## Usage
 
-1. Import Custom Element:
+1. Install The Component:
 
-	```html
-	<link rel="import" href="PATH/TO/YOUR/COMPONENTS/poly-badge/poly-badge.html">
+	```sh
+	bower install poly-badge --save
 	```
 
-2. Start using it!
+2. Import Custom Element:
+
+	```html
+	<link rel="import" href="PATH/TO/BOWER/COMPONENTS/poly-badge/poly-badge.html">
+	```
+
+3. Start using it!
 
 	```html
 	<poly-badge>5</poly-badge>
