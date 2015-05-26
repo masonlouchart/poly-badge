@@ -40,163 +40,179 @@ Little badge element based on Polymer.
   <template>
 
     <style>
-    :host {
-      display: inline-block;
-      line-height: initial;
-      min-width: 24px;
-      text-align: center;
-      border-radius: 3px;
-      color: #fff;
-      margin: 0 2px;
-    }
+      :host {
+        display: inline-block;
+        line-height: initial;
+        min-width: 24px;
+        text-align: center;
+        border-radius: 3px;
+        color: #fff;
+        margin: 0 2px;
+      }
 
-    paper-shadow {
-      background-color: #E91E63;
-    }
+      paper-shadow {
+        background-color: #E91E63;
+      }
 
-    .rounded {
-      border-radius: 50%;
-      padding: 3px 0;
-    }
+      .rounded {
+        border-radius: 50%;
+        padding: 3px 0;
+      }
 
-    .wide {
-      border-radius: inherit;
-      padding: 2px 4px;
-    }
+      .wide {
+        border-radius: inherit;
+        padding: 2px 4px;
+      }
 
-    .info,
-    .warning,
-    .error {
-      font-size: 0.8em;
-    }
+      .info,
+      .warning,
+      .error {
+        font-size: 0.8em;
+      }
 
-    .info {
-      background-color: #03A9F4;
-    }
+      .info {
+        background-color: #03A9F4;
+      }
 
-    .warning {
-      background-color: #FF9800;
-    }
+      .warning {
+        background-color: #FF9800;
+      }
 
-    .error {
-      background-color: #F44336;
-    }
+      .error {
+        background-color: #F44336;
+      }
     </style>
 
     <paper-shadow z="0" class="{{_classes}}" animated>
       <template if="{{_isMarker}}">{{_label}}</template>
-      <template if="{{!_isMarker}}"><content></content></template>
+      <template if="{{!_isMarker}}">
+        <content></content>
+      </template>
     </paper-shadow>
 
   </template>
   <script>
-  (function(){
-    Polymer('poly-badge', {
+    (function() {
+      Polymer('poly-badge', {
 
-      publish: {
+        publish: {
+          /**
+           * Force the badge to be "large".
+           *
+           * @attribute wide
+           * @type boolean
+           * @default false
+           */
+          wide: false,
+
+          /**
+           * Set the shadow-box raised level.
+           *
+           * @attribute raised
+           * @type integer
+           * @default 0
+           */
+          raised: 0,
+
+          /**
+           * Set the badge like an info marker. Small font size, white on
+           * background light-blue.
+           *
+           * @attribute info
+           * @type boolean
+           * @default false
+           */
+          info: false,
+
+          /**
+           * Set the badge like a warning marker. Small font size, white on
+           * background light-blue.
+           *
+           * @attribute warning
+           * @type boolean
+           * @default false
+           */
+          warning: false,
+
+          /**
+           * Set the badge like an error marker. Small font size, white on
+           * background light-blue.
+           *
+           * @attribute error
+           * @type boolean
+           * @default false
+           */
+          error: false,
+
+          /**
+           * Set the text color.
+           *
+           * @attribute color
+           * @type string
+           * @default #fff (white)
+           */
+          color: null,
+
+          /**
+           * Set the background color.
+           *
+           * @attribute bgc
+           * @type string
+           * @default #E91E63 (fuschia)
+           */
+          bgc: null
+        },
+
         /**
-         * Force the badge to be "large".
-         *
-         * @attribute wide
-         * @type boolean
-         * @default false
+         * Computed property to set style on the span.
          */
-        wide: false,
+        _classes: null,
 
-        /**
-         * Set the shadow-box raised level.
-         *
-         * @attribute raised
-         * @type integer
-         * @default 0
-         */
-        raised: 0,
+        _wide: false,
 
-        /**
-         * Set the badge like an info marker. Small font size, white on
-         * background light-blue.
-         *
-         * @attribute info
-         * @type boolean
-         * @default false
-         */
-        info: false,
-
-        /**
-         * Set the badge like a warning marker. Small font size, white on
-         * background light-blue.
-         *
-         * @attribute warning
-         * @type boolean
-         * @default false
-         */
-        warning: false,
-
-        /**
-         * Set the badge like an error marker. Small font size, white on
-         * background light-blue.
-         *
-         * @attribute error
-         * @type boolean
-         * @default false
-         */
-        error: false,
-
-        /**
-         * Set the text color.
-         *
-         * @attribute color
-         * @type string
-         * @default #fff (white)
-         */
-        color: null,
-
-        /**
-         * Set the background color.
-         *
-         * @attribute bgc
-         * @type string
-         * @default #E91E63 (fuschia)
-         */
-        bgc: null
-      },
-
-      /**
-       * Computed property to set style on the span.
-       */
-      _classes: null,
-
-      computed: {
-        // _width: '$.badge.clientWidth',
-        _label: 'error && "ERROR" || warning && "WARNING" || info && "INFO"',
-        _isMarker: '_label ? true : false',
-        _classes: '{wide:wide, rounded:!wide, info:info, warning:warning,\
+        computed: {
+          // _width: '$.badge.clientWidth',
+          _label: 'error && "ERROR" || warning && "WARNING" || info && "INFO"',
+          _isMarker: '_label ? true : false',
+          _classes: '{wide:_wide || wide, rounded:!wide && !_wide, info:info, warning:warning,\
           error:error, raised:raised} | tokenList'
-      },
+        },
 
-      attached: function () {
-        this.wide = this.wide || this.clientWidth > 24;
-      },
+        ready: function() {
+          var _this = this,
+            observer = new MutationObserver(function(mutations) {
+              //console.debug("Something changed!");
+              _this._wide = _this.clientWidth > 24;
+            }).observe(this, {
+              childList: true,
+              subtree: true,
+              characterData: true
+            });
+        },
 
-      colorChanged: function (oldValue, newValue) {
-        if (!this._isMarker) {
-          this.shadowRoot.querySelector('paper-shadow')
-            .style.setProperty('color', newValue);
+        attached: function() {
+          this.wide = this.wide || this.clientWidth > 24;
+        },
+
+        colorChanged: function(oldValue, newValue) {
+          if (!this._isMarker) {
+            this.shadowRoot.querySelector('paper-shadow')
+              .style.setProperty('color', newValue);
+          }
+        },
+
+        bgcChanged: function(oldValue, newValue) {
+          if (!this._isMarker) {
+            this.shadowRoot.querySelector('paper-shadow')
+              .style.setProperty('background-color', newValue);
+          }
+        },
+
+        raisedChanged: function(oldValue, newValue) {
+          this.shadowRoot.querySelector('paper-shadow').setZ(newValue);
         }
-      },
 
-      bgcChanged: function (oldValue, newValue) {
-        if (!this._isMarker) {
-          this.shadowRoot.querySelector('paper-shadow')
-            .style.setProperty('background-color', newValue);
-        }
-      },
-
-      raisedChanged: function (oldValue, newValue) {
-        this.shadowRoot.querySelector('paper-shadow').setZ(newValue);
-      }
-
-    })
-  })();
+      })
+    })();
   </script>
 </polymer-element>
