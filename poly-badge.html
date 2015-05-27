@@ -171,7 +171,6 @@ Little badge element based on Polymer.
         _wide: false,
 
         computed: {
-          // _width: '$.badge.clientWidth',
           _label: 'error && "ERROR" || warning && "WARNING" || info && "INFO"',
           _isMarker: '_label ? true : false',
           _classes: '{wide:_wide || wide, rounded:!wide && !_wide, info:info, warning:warning,\
@@ -181,7 +180,6 @@ Little badge element based on Polymer.
         ready: function() {
           var _this = this,
             observer = new MutationObserver(function(mutations) {
-              //console.debug("Something changed!");
               _this._wide = _this.clientWidth > 24;
             }).observe(this, {
               childList: true,
