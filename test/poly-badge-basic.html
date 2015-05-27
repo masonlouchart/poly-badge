@@ -75,19 +75,21 @@ limitations under the License.
       test('in info marker is "INFO"', function () {
         var badge = cloneAndAppendTemplate('marker');
         badge.info = true;
-        badge.textContent = 'Yolo';
+        badge.textContent = 'Foo Bar';
         assertMarker('INFO', badge);
       })
 
       test('in warning marker is "WARNING"', function () {
         var badge = cloneAndAppendTemplate('marker');
         badge.warning = true;
+        badge.textContent = 'Foo Bar';
         assertMarker('WARNING', badge);
       })
 
       test('in error marker is "ERROR"', function () {
         var badge = cloneAndAppendTemplate('marker');
         badge.error = true;
+        badge.textContent = 'Foo Bar';
         assertMarker('ERROR', badge);
       })
 
@@ -107,7 +109,7 @@ limitations under the License.
 
       test('raised can be changed', function () {
         var badge = cloneAndAppendTemplate('default');
-        badge.raised = 1;
+        badge.setRaised(1);
         flush(function() {
           setTimeout(function() {
             assert.equal(1, badge.shadowRoot.querySelector('paper-shadow').z);
@@ -121,19 +123,19 @@ limitations under the License.
       test('text can be changed', function () {
         var badge = cloneAndAppendTemplate('default');
         var defaultColor = badge.color;
-        badge.color = 'deeppink';
-        assert.notOk(
-          defaultColor,
-          badge.shadowRoot.querySelector('paper-shadow').color
+        badge.setColor('red');
+        assert.equal(
+          'red',
+          badge.shadowRoot.querySelector('paper-shadow').style.color
         );
       })
 
       test('background can be changed', function () {
         var badge = cloneAndAppendTemplate('default');
         var defaultBg = badge.bgc;
-        badge.bgc = 'deeppink';
-        assert.notOk(
-          defaultBg,
+        badge.setBgc('red');
+        assert.equal(
+          'red',
           badge.shadowRoot.querySelector('paper-shadow').style.backgroundColor
         );
       })

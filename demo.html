@@ -251,12 +251,18 @@ limitations under the License.
           <tr><td>Attribute</td><td>Value</td></tr>
         </thead>
         <tbody>
-          <tr><td>content:</td><td><input type="text" value="{{value}}"></td></tr>
-          <tr><td>wide:</td><td><input type="checkbox" checked="{{wide}}"></td></tr>
+          <tr>
+            <td>content:</td>
+            <td><input type="text" value="{{value}}"></td>
+          </tr>
+          <tr>
+            <td>wide:</td>
+            <td><input type="checkbox" checked="{{wide}}"></td>
+          </tr>
           <tr>
             <td>raised:</td>
             <td>
-              <select onchange="changeWide(value)">
+              <select onchange="changeRaised(value)">
                 <option value="0">0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -266,15 +272,28 @@ limitations under the License.
               </select>
             </td>
           </tr>
-          <tr><td>color:</td><td><input type="text" value="{{color}}"></td></tr>
-          <tr><td>bgc:</td><td><input type="text" value="{{bgc}}"></td></tr>
+          <tr>
+            <td>color:</td>
+            <td>
+              <input type="text" value="{{color}}">
+              <input type="button" onclick="changeColor(title)"
+                     title="{{color}}" value="OK">
+            </td>
+          </tr>
+          <tr>
+            <td>bgc:</td>
+            <td>
+              <input type="text" value="{{bgc}}">
+              <input type="button" onclick="changeBgc(title)"
+                     title="{{bgc}}" value="OK">
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
     <div flex self-center>
-      Result =>
-      <poly-badge id="example" wide="{{wide}}" raised="{{raised}}" color="{{color}}"
-        bgc="{{bgc}}">
+      Result =&gt;
+      <poly-badge id="example" wide="{{wide}}">
         {{value}}
       </poly-badge>
     </div>
@@ -290,8 +309,14 @@ limitations under the License.
 </div>
 </template>
 <script>
-  var changeWide = function (value) {
-    document.querySelector('#example').raised = parseInt(value);
+  var changeRaised = function (value) {
+    document.querySelector('#example').setRaised(parseInt(value));
+  }
+  var changeColor = function (color) {
+    document.querySelector('#example').setColor(color);
+  }
+  var changeBgc = function (color) {
+    document.querySelector('#example').setBgc(color);
   }
 </script>
 </body>

@@ -50,10 +50,6 @@ Little badge element based on Polymer.
         margin: 0 2px;
       }
 
-      paper-shadow {
-        background-color: #E91E63;
-      }
-
       .rounded {
         border-radius: 50%;
         padding: 3px 0;
@@ -83,7 +79,7 @@ Little badge element based on Polymer.
       }
     </style>
 
-    <paper-shadow z="0" class="{{_classes}}" animated>
+    <paper-shadow z="[[raised]]" class="{{_classes}}" animated>
       <template if="{{_isMarker}}">{{_label}}</template>
       <template if="{{!_isMarker}}">
         <content></content>
@@ -93,6 +89,14 @@ Little badge element based on Polymer.
   </template>
   <script>
     (function() {
+
+      /**
+       * Defaults colors.
+       * @type String
+       */
+      var fuschia = '#E91E63',
+          white = '#ffffff';
+
       Polymer('poly-badge', {
 
         publish: {
@@ -106,7 +110,8 @@ Little badge element based on Polymer.
           wide: false,
 
           /**
-           * Set the shadow-box raised level.
+           * The z-depth of this shadow, from 0-5. Setting this property after
+           * element creation has no effect. Use setRaised() instead.
            *
            * @attribute raised
            * @type integer
@@ -186,28 +191,53 @@ Little badge element based on Polymer.
               subtree: true,
               characterData: true
             });
+
+          // Initializes the text and background colors.
+          this.setColor(this.color || white);
+          this.setBgc(this.bgc || fuschia);
         },
 
         attached: function() {
           this.wide = this.wide || this.clientWidth > 24;
         },
 
-        colorChanged: function(oldValue, newValue) {
+        /**
+         * Set the badg text color. This should be used after element
+         * creation instead of setting the `color` property directly.
+         *
+         * @method setColor
+         * @param  string newColor
+         */
+        setColor: function(newColor) {
           if (!this._isMarker) {
             this.shadowRoot.querySelector('paper-shadow')
-              .style.setProperty('color', newValue);
+              .style.setProperty('color', newColor);
           }
         },
 
-        bgcChanged: function(oldValue, newValue) {
+        /**
+         * Set the badge background color. This should be used after element
+         * creation instead of setting the `bgc` property directly.
+         *
+         * @method setBgc
+         * @param  string newColor
+         */
+        setBgc: function(newColor) {
           if (!this._isMarker) {
             this.shadowRoot.querySelector('paper-shadow')
-              .style.setProperty('background-color', newValue);
+              .style.setProperty('background-color', newColor);
           }
         },
 
-        raisedChanged: function(oldValue, newValue) {
-          this.shadowRoot.querySelector('paper-shadow').setZ(newValue);
+        /**
+         * Set the z-depth of the shadow. This should be used after element
+         * creation instead of setting the `raised` property directly.
+         *
+         * @method setRaised
+         * @param  number newLevel
+         */
+        setRaised: function(newLevel) {
+          this.shadowRoot.querySelector('paper-shadow').setZ(newLevel);
         }
 
       })
