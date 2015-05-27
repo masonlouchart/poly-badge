@@ -3,3 +3,4 @@
 #     Name <email address>
 
 Mason Louchart <louchart.mason@gmail.com>
+Pierre Fraisse <pierre.fraisse@nebulous.fr>
