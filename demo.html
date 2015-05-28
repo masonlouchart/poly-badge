@@ -183,6 +183,26 @@ limitations under the License.
         color is #0034FF
       </td>
     </tr>
+    <tr>
+      <td>xs</td>
+      <td>true</td>
+      <td>set the size to<poly-badge xs>0.7</poly-badge>em</td>
+    </tr>
+    <tr>
+      <td>s</td>
+      <td>true</td>
+      <td>set the size to<poly-badge s>0.8</poly-badge>em</td>
+    </tr>
+    <tr>
+      <td>l</td>
+      <td>true</td>
+      <td>set the size to<poly-badge l>1.2</poly-badge>em</td>
+    </tr>
+    <tr>
+      <td>xl</td>
+      <td>true</td>
+      <td>set the size to<poly-badge xl>1.4</poly-badge>em</td>
+    </tr>
     </tbody>
   </table>
 
@@ -231,6 +251,39 @@ limitations under the License.
       <poly-badge bgc="#37ff00">#37ff00</poly-badge>+
       <poly-badge error></poly-badge>= nope, you can't overwrite the marker
       <poly-badge color="black" bgc="#37ff00" error></poly-badge>
+    </li>
+    <li>
+      size
+      <poly-badge xs>xs</poly-badge>+
+      <poly-badge info></poly-badge>= a very tiny marker
+      <poly-badge xs info></poly-badge>
+    </li>
+    <li>
+      size
+      <poly-badge xs>xs</poly-badge>+
+      <poly-badge warning></poly-badge>= a very tiny marker
+      <poly-badge xs warning></poly-badge>
+    </li>
+    <li>
+      size
+      <poly-badge xs>xs</poly-badge>+
+      <poly-badge error></poly-badge>= a very tiny marker
+      <poly-badge xs error></poly-badge>
+    </li>
+    <li>
+      size
+      <poly-badge xs>xs</poly-badge>+
+      style <poly-badge wide>wide</poly-badge>+
+      <poly-badge info></poly-badge>= this very tiny marker
+      <poly-badge xs info wide></poly-badge>
+    </li>
+    <li>
+      the priority size between
+      <poly-badge xs>xs</poly-badge>,
+      <poly-badge s>s</poly-badge>,
+      <poly-badge l>l</poly-badge>and
+      <poly-badge xl>xl</poly-badge>is the
+      <poly-badge xs s l xl>BIG</poly-badge> one!
     </li>
   </ul>
 
