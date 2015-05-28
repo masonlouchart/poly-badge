@@ -44,7 +44,6 @@ Little badge element based on Polymer.
       :host {
         display: inline-block;
         line-height: initial;
-        min-width: 24px;
         text-align: center;
         border-radius: 3px;
         color: #fff;
@@ -61,12 +60,6 @@ Little badge element based on Polymer.
         padding: 2px 4px;
       }
 
-      .info,
-      .warning,
-      .error {
-        font-size: 0.8em;
-      }
-
       .info {
         background-color: #03A9F4;
       }
@@ -77,6 +70,22 @@ Little badge element based on Polymer.
 
       .error {
         background-color: #F44336;
+      }
+
+      .XS {
+        font-size: 0.7em;
+      }
+
+      .S {
+        font-size: 0.8em;
+      }
+
+      .L {
+        font-size: 1.2em;
+      }
+
+      .XL {
+        font-size: 1.4em;
       }
     </style>
 
@@ -166,7 +175,43 @@ Little badge element based on Polymer.
            * @type string
            * @default #E91E63 (fuschia)
            */
-          bgc: null
+          bgc: null,
+
+        /**
+         * Set the font-size to 0.7em.
+         *
+         * @attribute xs
+         * @type boolean
+         * @default false
+         */
+          xs: false,
+
+          /**
+           * Set the font-size to 0.8em.
+           *
+           * @attribute s
+           * @type boolean
+           * @default false
+           */
+          s: false,
+
+          /**
+           * Set the font-size to 1.2em.
+           *
+           * @attribute l
+           * @type boolean
+           * @default false
+           */
+          l: false,
+
+          /**
+           * Set the font-size to 1.4em.
+           *
+           * @attribute xl
+           * @type boolean
+           * @default false
+           */
+          xl: false
         },
 
         /**
@@ -174,19 +219,19 @@ Little badge element based on Polymer.
          */
         _classes: null,
 
-        _wide: false,
-
         computed: {
-          _label: 'error && "ERROR" || warning && "WARNING" || info && "INFO"',
+          _label: 'error && (xs ? "!!!" : "ERROR") ||\
+            warning && (xs ? "!" : "WARNING") || info && (xs ? "i" : "INFO")',
           _isMarker: '_label ? true : false',
-          _classes: '{wide:_wide || wide, rounded:!wide && !_wide, info:info, warning:warning,\
-          error:error, raised:raised} | tokenList'
+          _classes: '{wide:wide, rounded:!wide, info:info, warning:warning,\
+            error:error, raised:raised, XL:xl, L:l, S:s, XS:xs} | tokenList'
         },
 
         ready: function() {
           var _this = this,
             observer = new MutationObserver(function(mutations) {
-              _this._wide = _this.clientWidth > 24;
+              _this.wide = _this.clientWidth > 24;
+              _this.style.setProperty('min-width', _this.clientHeight + 'px');
             }).observe(this, {
               childList: true,
               subtree: true,
@@ -200,10 +245,11 @@ Little badge element based on Polymer.
 
         attached: function() {
           this.wide = this.wide || this.clientWidth > 24;
+          this.style.setProperty('min-width', this.clientHeight + 'px');
         },
 
         /**
-         * Set the badg text color. This should be used after element
+         * Set the badge text color. This should be used after element
          * creation instead of setting the `color` property directly.
          *
          * @method setColor
