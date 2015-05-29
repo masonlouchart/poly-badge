@@ -5,7 +5,7 @@
   "contributors": [
     "http://LM450N.github.io/poly-badge/components/poly-badge/CONTRIBUTORS.txt"
   ],
-  "description": "Little badge element based on Polymer.",
+  "description": "A poly-badge is a pure Polymer component to display a count or a tiny label.",
   "license": "http://LM450N.github.io/poly-badge/components/poly-badge/LICENSE.txt",
   "homepage": "http://LM450N.github.io/poly-badge/components/poly-badge/",
   "repository": {
