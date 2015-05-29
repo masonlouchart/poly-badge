@@ -245,7 +245,11 @@ Little badge element based on Polymer.
 
         attached: function() {
           this.wide = this.wide || this.clientWidth > 24;
-          this.style.setProperty('min-width', this.clientHeight + 'px');
+          if (this.raised) {
+            this.$.shadow.style.setProperty('min-width', this.clientHeight + 'px');
+          } else {
+            this.style.setProperty('min-width', this.clientHeight + 'px');
+          }
         },
 
         /**
