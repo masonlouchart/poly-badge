@@ -219,18 +219,21 @@ Little badge element based on Polymer.
          */
         _classes: null,
 
+        _wide: false,
+
         computed: {
           _label: 'error && (xs ? "!!!" : "ERROR") ||\
             warning && (xs ? "!" : "WARNING") || info && (xs ? "i" : "INFO")',
           _isMarker: '_label ? true : false',
-          _classes: '{wide:wide, rounded:!wide, info:info, warning:warning,\
-            error:error, raised:raised, XL:xl, L:l, S:s, XS:xs} | tokenList'
+          _classes: '{wide:_wide || wide, rounded:!wide && !_wide, info:info,\
+            warning:warning, error:error, raised:raised, XL:xl, L:l, S:s, XS:xs}\
+            | tokenList'
         },
 
         ready: function() {
           var _this = this,
             observer = new MutationObserver(function(mutations) {
-              _this.wide = _this.clientWidth > 24;
+              _this._wide = _this.clientWidth > 24;
               _this.style.setProperty('min-width', _this.clientHeight + 'px');
             }).observe(this, {
               childList: true,
