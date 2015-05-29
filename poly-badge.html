@@ -89,7 +89,7 @@ Little badge element based on Polymer.
       }
     </style>
 
-    <paper-shadow z="[[raised]]" class="{{_classes}}" animated>
+    <paper-shadow id="shadow" z="[[raised]]" class="{{_classes}}" animated>
       <template if="{{_isMarker}}">{{_label}}</template>
       <template if="{{!_isMarker}}">
         <content></content>
@@ -257,8 +257,7 @@ Little badge element based on Polymer.
          */
         setColor: function(newColor) {
           if (!this._isMarker) {
-            this.shadowRoot.querySelector('paper-shadow')
-              .style.setProperty('color', newColor);
+            this.$.shadow.style.setProperty('color', newColor);
           }
         },
 
@@ -271,8 +270,7 @@ Little badge element based on Polymer.
          */
         setBgc: function(newColor) {
           if (!this._isMarker) {
-            this.shadowRoot.querySelector('paper-shadow')
-              .style.setProperty('background-color', newColor);
+            this.$.shadow.style.setProperty('background-color', newColor);
           }
         },
 
@@ -284,7 +282,7 @@ Little badge element based on Polymer.
          * @param  number newLevel
          */
         setRaised: function(newLevel) {
-          this.shadowRoot.querySelector('paper-shadow').setZ(newLevel);
+          this.$.shadow.setZ(newLevel);
         }
 
       })
