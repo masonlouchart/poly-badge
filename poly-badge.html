@@ -38,261 +38,250 @@ A poly-badge is a pure Polymer component to display a count or a tiny label.
 @homepage http://LM450N.github.io/poly-badge/components/poly-badge/
 -->
 <polymer-element name="poly-badge">
-  <template>
+<template>
 
-    <style>
-      :host {
-        display: inline-block;
-        line-height: initial;
-        text-align: center;
-        border-radius: 3px;
-        color: #fff;
-        margin: 0 2px;
-      }
+  <style>
+  :host {
+    display: inline-block;
+    line-height: initial;
+    text-align: center;
+    color: #fff;
+    margin: 0 2px;
+  }
 
-      .rounded {
-        border-radius: 50%;
-        padding: 3px 0;
-      }
+  paper-shadow {
+    border-radius: 50%;
+    padding: 3px 0;
+  }
 
-      .wide {
-        border-radius: inherit;
-        padding: 2px 4px;
-      }
+  .wide {
+    border-radius: 3px;
+    padding: 2px 4px;
+  }
 
-      .info {
-        background-color: #03A9F4;
-      }
+  .info {
+    background-color: #03A9F4;
+  }
 
-      .warning {
-        background-color: #FF9800;
-      }
+  .warning {
+    background-color: #FF9800;
+  }
 
-      .error {
-        background-color: #F44336;
-      }
+  .error {
+    background-color: #F44336;
+  }
 
-      .XS {
-        font-size: 0.7em;
-      }
+  .XS {
+    font-size: 0.7em;
+  }
 
-      .S {
-        font-size: 0.8em;
-      }
+  .S {
+    font-size: 0.8em;
+  }
 
-      .L {
-        font-size: 1.2em;
-      }
+  .L {
+    font-size: 1.2em;
+  }
 
-      .XL {
-        font-size: 1.4em;
-      }
-    </style>
+  .XL {
+    font-size: 1.4em;
+  }
+  </style>
 
-    <paper-shadow id="shadow" z="[[raised]]" class="{{_classes}}" animated>
-      <template if="{{_isMarker}}">{{_label}}</template>
-      <template if="{{!_isMarker}}">
-        <content></content>
-      </template>
-    </paper-shadow>
+  <paper-shadow id="shadow" z="[[raised]]" class="{{_classes}}" animated>
+    <template if="[[_isMarker]]">{{_label}}</template>
+    <template if="[[!_isMarker]]">
+      <content></content>
+    </template>
+  </paper-shadow>
 
-  </template>
-  <script>
-    (function() {
+</template>
+<script>
+(function() {
+
+  /**
+   * Defaults colors.
+   * @type String
+   */
+  var fuschia = '#E91E63',
+    white = '#ffffff';
+
+  Polymer('poly-badge', {
+
+    publish: {
+      /**
+       * Force the badge to be "large".
+       *
+       * @attribute wide
+       * @type boolean
+       * @default false
+       */
+      wide: false,
 
       /**
-       * Defaults colors.
-       * @type String
+       * The z-depth of this shadow, from 0-5. Setting this property after
+       * element creation has no effect. Use setRaised() instead.
+       *
+       * @attribute raised
+       * @type integer
+       * @default 0
        */
-      var fuschia = '#E91E63',
-          white = '#ffffff';
+      raised: 0,
 
-      Polymer('poly-badge', {
+      /**
+       * Set the badge like an info marker. Small font size, white on
+       * background light-blue.
+       *
+       * @attribute info
+       * @type boolean
+       * @default false
+       */
+      info: false,
 
-        publish: {
-          /**
-           * Force the badge to be "large".
-           *
-           * @attribute wide
-           * @type boolean
-           * @default false
-           */
-          wide: false,
+      /**
+       * Set the badge like a warning marker. Small font size, white on
+       * background light-blue.
+       *
+       * @attribute warning
+       * @type boolean
+       * @default false
+       */
+      warning: false,
 
-          /**
-           * The z-depth of this shadow, from 0-5. Setting this property after
-           * element creation has no effect. Use setRaised() instead.
-           *
-           * @attribute raised
-           * @type integer
-           * @default 0
-           */
-          raised: 0,
+      /**
+       * Set the badge like an error marker. Small font size, white on
+       * background light-blue.
+       *
+       * @attribute error
+       * @type boolean
+       * @default false
+       */
+      error: false,
 
-          /**
-           * Set the badge like an info marker. Small font size, white on
-           * background light-blue.
-           *
-           * @attribute info
-           * @type boolean
-           * @default false
-           */
-          info: false,
+      /**
+       * Set the text color.
+       *
+       * @attribute color
+       * @type string
+       * @default #fff (white)
+       */
+      color: null,
 
-          /**
-           * Set the badge like a warning marker. Small font size, white on
-           * background light-blue.
-           *
-           * @attribute warning
-           * @type boolean
-           * @default false
-           */
-          warning: false,
+      /**
+       * Set the background color.
+       *
+       * @attribute bgc
+       * @type string
+       * @default #E91E63 (fuschia)
+       */
+      bgc: null,
 
-          /**
-           * Set the badge like an error marker. Small font size, white on
-           * background light-blue.
-           *
-           * @attribute error
-           * @type boolean
-           * @default false
-           */
-          error: false,
+      /**
+       * Set the font-size to 0.7em.
+       *
+       * @attribute xs
+       * @type boolean
+       * @default false
+       */
+      xs: false,
 
-          /**
-           * Set the text color.
-           *
-           * @attribute color
-           * @type string
-           * @default #fff (white)
-           */
-          color: null,
+      /**
+       * Set the font-size to 0.8em.
+       *
+       * @attribute s
+       * @type boolean
+       * @default false
+       */
+      s: false,
 
-          /**
-           * Set the background color.
-           *
-           * @attribute bgc
-           * @type string
-           * @default #E91E63 (fuschia)
-           */
-          bgc: null,
+      /**
+       * Set the font-size to 1.2em.
+       *
+       * @attribute l
+       * @type boolean
+       * @default false
+       */
+      l: false,
 
-        /**
-         * Set the font-size to 0.7em.
-         *
-         * @attribute xs
-         * @type boolean
-         * @default false
-         */
-          xs: false,
+      /**
+       * Set the font-size to 1.4em.
+       *
+       * @attribute xl
+       * @type boolean
+       * @default false
+       */
+      xl: false
+    },
 
-          /**
-           * Set the font-size to 0.8em.
-           *
-           * @attribute s
-           * @type boolean
-           * @default false
-           */
-          s: false,
+    /**
+     * Computed property to set style on the badge.
+     */
+    _classes: null,
 
-          /**
-           * Set the font-size to 1.2em.
-           *
-           * @attribute l
-           * @type boolean
-           * @default false
-           */
-          l: false,
+    computed: {
+      _label: 'error && (xs ? "!!!" : "ERROR") ||\
+        warning && (xs ? "!" : "WARNING") || info && (xs ? "i" : "INFO")',
+      _isMarker: '_label ? true : false',
+      _classes: '{wide:wide, info:info, warning:warning, error:error,\
+        raised:raised, XL:xl, L:l, S:s, XS:xs} | tokenList'
+    },
 
-          /**
-           * Set the font-size to 1.4em.
-           *
-           * @attribute xl
-           * @type boolean
-           * @default false
-           */
-          xl: false
-        },
+    ready: function() {
+      // Initializes the text and background colors.
+      this.setColor(this.color || white);
+      this.setBgc(this.bgc || fuschia);
+    },
 
-        /**
-         * Computed property to set style on the span.
-         */
-        _classes: null,
+    attached: function() {
+      // Defines if the badge style.
+      this.wide = this.wide || this.clientWidth > 24;
 
-        _wide: false,
+      // Initializes the min-width.
+      if (this.raised) {
+        this.$.shadow.style.setProperty('min-width', this.clientHeight + 'px');
+      } else {
+        this.style.setProperty('min-width', this.clientHeight + 'px');
+      }
+    },
 
-        computed: {
-          _label: 'error && (xs ? "!!!" : "ERROR") ||\
-            warning && (xs ? "!" : "WARNING") || info && (xs ? "i" : "INFO")',
-          _isMarker: '_label ? true : false',
-          _classes: '{wide:_wide || wide, rounded:!wide && !_wide, info:info,\
-            warning:warning, error:error, raised:raised, XL:xl, L:l, S:s, XS:xs}\
-            | tokenList'
-        },
+    /**
+     * Set the badge text color. This should be used after element
+     * creation instead of setting the `color` property directly.
+     *
+     * @method setColor
+     * @param  string newColor
+     */
+    setColor: function(newColor) {
+      if (!this._isMarker) {
+        this.$.shadow.style.setProperty('color', newColor);
+      }
+    },
 
-        ready: function() {
-          var _this = this,
-            observer = new MutationObserver(function(mutations) {
-              _this._wide = _this.clientWidth > 24;
-              _this.style.setProperty('min-width', _this.clientHeight + 'px');
-            }).observe(this, {
-              childList: true,
-              subtree: true,
-              characterData: true
-            });
+    /**
+     * Set the badge background color. This should be used after element
+     * creation instead of setting the `bgc` property directly.
+     *
+     * @method setBgc
+     * @param  string newColor
+     */
+    setBgc: function(newColor) {
+      if (!this._isMarker) {
+        this.$.shadow.style.setProperty('background-color', newColor);
+      }
+    },
 
-          // Initializes the text and background colors.
-          this.setColor(this.color || white);
-          this.setBgc(this.bgc || fuschia);
-        },
+    /**
+     * Set the z-depth of the shadow. This should be used after element
+     * creation instead of setting the `raised` property directly.
+     *
+     * @method setRaised
+     * @param  number newLevel
+     */
+    setRaised: function(newLevel) {
+      this.$.shadow.setZ(newLevel);
+    }
 
-        attached: function() {
-          this.wide = this.wide || this.clientWidth > 24;
-          if (this.raised) {
-            this.$.shadow.style.setProperty('min-width', this.clientHeight + 'px');
-          } else {
-            this.style.setProperty('min-width', this.clientHeight + 'px');
-          }
-        },
-
-        /**
-         * Set the badge text color. This should be used after element
-         * creation instead of setting the `color` property directly.
-         *
-         * @method setColor
-         * @param  string newColor
-         */
-        setColor: function(newColor) {
-          if (!this._isMarker) {
-            this.$.shadow.style.setProperty('color', newColor);
-          }
-        },
-
-        /**
-         * Set the badge background color. This should be used after element
-         * creation instead of setting the `bgc` property directly.
-         *
-         * @method setBgc
-         * @param  string newColor
-         */
-        setBgc: function(newColor) {
-          if (!this._isMarker) {
-            this.$.shadow.style.setProperty('background-color', newColor);
-          }
-        },
-
-        /**
-         * Set the z-depth of the shadow. This should be used after element
-         * creation instead of setting the `raised` property directly.
-         *
-         * @method setRaised
-         * @param  number newLevel
-         */
-        setRaised: function(newLevel) {
-          this.$.shadow.setZ(newLevel);
-        }
-
-      })
-    })();
-  </script>
+  })
+})();
+</script>
 </polymer-element>
