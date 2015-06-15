@@ -17,13 +17,13 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 -->
-<html lang="">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
   <title>poly-badge Demo</title>
-  <script src="../webcomponentsjs/webcomponents.js"></script>
-  <link rel="import" href="poly-badge.html">
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../poly-badge.html">
+  <link rel="import" type="css" href="../../iron-flex-layout/classes/iron-flex-layout.html">
   <style type="text/css">
     body {
       font-family: Roboto, 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -52,17 +52,17 @@ limitations under the License.
     }
   </style>
 </head>
-<body unresolved>
-<template is="auto-binding">
-<div layout horizontal center-justified>
+<body>
+<div class="layout horizontal center-justified">
 <div>
 
-  <h1>A<poly-badge raised="1">poly-badge</poly-badge> looks like this</h1>
+  <h1>A<poly-badge elevation="1">poly-badge</poly-badge> looks like this</h1>
 
   <p>
     The badge width is autoscaled when the content width exceed 24px. The badge
     is rounded under 24px, it's ideal for little numbers or three letters.
-    Otherwise, the badge acquires a wide style. You can also force the wide style.
+    Otherwise, the badge acquires a wide style. You can also force the wide
+    style. <b>Does not support data-binding anymore</b>.
   </p>
 
   <h2>Examples of badges</h2>
@@ -82,9 +82,9 @@ limitations under the License.
     <li>The wide style can
       <poly-badge wide>be</poly-badge>
       forced, even
-      <poly-badge>if</poly-badge>
+      <poly-badge wide>if</poly-badge>
       <poly-badge>it</poly-badge>
-      <poly-badge>is</poly-badge>
+      <poly-badge wide>is</poly-badge>
       <poly-badge>not</poly-badge>
       necessary.
     </li>
@@ -101,38 +101,38 @@ limitations under the License.
     </thead>
     <tbody>
     <tr>
-      <td>raised</td>
+      <td>elevation</td>
       <td>1</td>
-      <td>add a shadow-box with raise of
-        <poly-badge raised="1">1</poly-badge>
+      <td>add a paper-material with elevation of
+        <poly-badge elevation="1">1</poly-badge>
       </td>
     </tr>
     <tr>
-      <td>raised</td>
+      <td>elevation</td>
       <td>2</td>
-      <td>add a shadow-box with raise of
-        <poly-badge raised="2">2</poly-badge>
+      <td>add a paper-material with elevation of
+        <poly-badge elevation="2">2</poly-badge>
       </td>
     </tr>
     <tr>
-      <td>raised</td>
+      <td>elevation</td>
       <td>3</td>
-      <td>add a shadow-box with raise of
-        <poly-badge raised="3">3</poly-badge>
+      <td>add a paper-material with elevation of
+        <poly-badge elevation="3">3</poly-badge>
       </td>
     </tr>
     <tr>
-      <td>raised</td>
+      <td>elevation</td>
       <td>4</td>
-      <td>add a shadow-box with raise of
-        <poly-badge raised="4">4</poly-badge>
+      <td>add a paper-material with elevation of
+        <poly-badge elevation="4">4</poly-badge>
       </td>
     </tr>
     <tr>
-      <td>raised</td>
+      <td>elevation</td>
       <td>5</td>
-      <td>add a shadow-box with raise of
-        <poly-badge raised="5">5</poly-badge>
+      <td>add a paper-material with elevation of
+        <poly-badge elevation="5">5</poly-badge>
       </td>
     </tr>
     <tr>
@@ -210,26 +210,26 @@ limitations under the License.
 
   <ul>
     <li>
-      <poly-badge info></poly-badge>+ raise of
-      <poly-badge raised="1">1</poly-badge>=
-      <poly-badge info raised="1"></poly-badge>
+      <poly-badge info></poly-badge>+ elevation of
+      <poly-badge elevation="1">1</poly-badge>=
+      <poly-badge info elevation="1"></poly-badge>
     </li>
     <li>
-      <poly-badge warning></poly-badge>+ raise of
-      <poly-badge raised="2">2</poly-badge>=
-      <poly-badge warning raised="2"></poly-badge>
+      <poly-badge warning></poly-badge>+ elevation of
+      <poly-badge elevation="2">2</poly-badge>=
+      <poly-badge warning elevation="2"></poly-badge>
     </li>
     <li>
-      <poly-badge error></poly-badge>+ raise of
-      <poly-badge raised="3">3</poly-badge>=
-      <poly-badge error raised="3"></poly-badge>
+      <poly-badge error></poly-badge>+ elevation of
+      <poly-badge elevation="3">3</poly-badge>=
+      <poly-badge error elevation="3"></poly-badge>
     </li>
     <li>
-      raise of
-      <poly-badge raised="5">5</poly-badge>+ the color
+      elevation of
+      <poly-badge elevation="5">5</poly-badge>+ the color
       <poly-badge color="#0037ff">#0037ff</poly-badge>+ and a bgc set to
       <poly-badge bgc="#37ff00">#37ff00</poly-badge>=
-      <poly-badge color="#0037ff" bgc="#37ff00" raised="5">It's too SwAgGy !!!</poly-badge>
+      <poly-badge color="#0037ff" bgc="#37ff00" elevation="5">It's too SwAgGy !!!</poly-badge>
     </li>
     <li>
       color
@@ -295,10 +295,9 @@ limitations under the License.
 
 </div>
 </div>
-</template>
 <script>
-  var changeRaised = function (value) {
-    document.querySelector('#example').setRaised(parseInt(value));
+  var changeelevation = function (value) {
+    document.querySelector('#example').setElevation(parseInt(value));
   }
   var changeColor = function (color) {
     document.querySelector('#example').setColor(color);

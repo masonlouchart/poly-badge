@@ -1,7 +1,9 @@
 {
   "name": "poly-badge",
-  "version": "1.1.2",
-  "authors": ["Mason Louchart"],
+  "version": "2.0.0",
+  "authors": [
+    "Mason Louchart"
+  ],
   "contributors": [
     "http://LM450N.github.io/poly-badge/components/poly-badge/CONTRIBUTORS.txt"
   ],
@@ -15,22 +17,24 @@
   "keywords": [
     "seed",
     "polymer",
+    "web-component",
     "web-components",
     "badge"
   ],
   "main": "poly-badge.html",
+  "ignore": [
+    "/.*",
+    "/node_modules",
+    "/bower_components",
+    "/test/",
+    "/demo/"
+  ],
   "dependencies": {
-    "polymer": "Polymer/polymer#^0.5.4",
-    "paper-shadow": "Polymer/paper-shadow#~0.5.6"
+    "polymer": "Polymer/polymer#^1.0.0",
+    "paper-material": "PolymerElements/paper-material#^1.0.0"
   },
   "devDependencies": {
-    "web-component-tester": "Polymer/web-component-tester#^2.2.3"
-  },
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ]
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "web-component-tester": "*"
+  }
 }
