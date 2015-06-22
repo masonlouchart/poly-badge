@@ -30,7 +30,7 @@ See the [Component Page][component_page]
 	<poly-badge>5</poly-badge>
 	<poly-badge>Hello</poly-badge>
 	<poly-badge wide>42</poly-badge>
-	<poly-badge raised="1">Shadow is added</poly-badge>
+	<poly-badge elevation="1">Shadow is added</poly-badge>
 	<poly-badge info></poly-badge>
 	<poly-badge color="white" bgc="black">Black & White</poly-badge>
 	...
@@ -38,19 +38,19 @@ See the [Component Page][component_page]
 
 ## Options
 
-Attribute | Description
-----------|------------
-`wide`    | Adapts the badge for a larger text
-`raised`  | Add a shadow
-`info`    | Is an info marker
-`warning` | Is a warning marker
-`error`   | Is an error marker
-`color`   | Set the text color
-`bgc`     | Set the background color
-`xs`      | Set the font-size to 0.7em
-`s`       | Set the font-size to 0.8em
-`l`       | Set the font-size to 1.2em
-`xl`      | Set the font-size to 1.4em
+Attribute    | Description
+-------------|------------
+`wide`       | Adapts the badge for a larger text
+`elevation`  | Add a shadow
+`info`       | Is an info marker
+`warning`    | Is a warning marker
+`error`      | Is an error marker
+`color`      | Set the text color
+`bgc`        | Set the background color
+`xs`         | Set the font-size to 0.7em
+`s`          | Set the font-size to 0.8em
+`l`          | Set the font-size to 1.2em
+`xl`         | Set the font-size to 1.4em
 
 **There are no required options!**
 
