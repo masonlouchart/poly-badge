@@ -34,8 +34,9 @@ A poly-badge is a pure Polymer component to display a count or a tiny label.
 
 @element poly-badge
 @demo demo/index.html
-@blurb A pure Polymer component to display a count or a tiny _label.
-@homepage http://LM450N.github.io/poly-badge/components/poly-badge/
+@demo https://LM450N.github.io/poly-badge/components/poly-badge/demo/
+@blurb A pure Polymer component to display a count or a tiny label.
+@homepage https://LM450N.github.io/poly-badge/components/poly-badge/
 -->
 <dom-module id="poly-badge">
   <style>
@@ -99,7 +100,7 @@ A poly-badge is a pure Polymer component to display a count or a tiny label.
 
     /**
      * Defaults colors.
-     * @type String
+     * @type {String}
      */
     var fuschia = '#E91E63',
       white = '#ffffff';
@@ -110,10 +111,10 @@ A poly-badge is a pure Polymer component to display a count or a tiny label.
 
       properties: {
         /**
-         * Force the badge to be "large".
+         * Forces the badge to be "large".
          *
          * @attribute wide
-         * @type boolean
+         * @type {Boolean}
          * @default false
          */
         wide: {
@@ -122,11 +123,11 @@ A poly-badge is a pure Polymer component to display a count or a tiny label.
         },
 
         /**
-         * The elevation level of this shadow, from 0-5. Setting this property
+         * The elevation level of the shadow, from 0-5. Setting this property
          * after element creation has no effect. Use setElevation() instead.
          *
          * @attribute elevation
-         * @type Number
+         * @type {Number}
          * @default 0
          */
         elevation: {
@@ -135,11 +136,11 @@ A poly-badge is a pure Polymer component to display a count or a tiny label.
         },
 
         /**
-         * Set the badge like an info marker. Small font size, white on
+         * Sets the badge like an info marker. Small font size, white on
          * background light-blue.
          *
          * @attribute info
-         * @type boolean
+         * @type {Boolean}
          * @default false
          */
         info: {
@@ -148,11 +149,11 @@ A poly-badge is a pure Polymer component to display a count or a tiny label.
         },
 
         /**
-         * Set the badge like a warning marker. Small font size, white on
+         * Sets the badge like a warning marker. Small font size, white on
          * background light-blue.
          *
          * @attribute warning
-         * @type boolean
+         * @type {Boolean}
          * @default false
          */
         warning: {
@@ -161,11 +162,11 @@ A poly-badge is a pure Polymer component to display a count or a tiny label.
         },
 
         /**
-         * Set the badge like an error marker. Small font size, white on
+         * Sets the badge like an error marker. Small font size, white on
          * background light-blue.
          *
          * @attribute error
-         * @type boolean
+         * @type {Boolean}
          * @default false
          */
         error: {
@@ -174,10 +175,10 @@ A poly-badge is a pure Polymer component to display a count or a tiny label.
         },
 
         /**
-         * Set the text color. The default value is white.
+         * Sets the text color.
          *
          * @attribute color
-         * @type string
+         * @type {String}
          * @default #fff (white)
          */
         color: {
@@ -186,10 +187,10 @@ A poly-badge is a pure Polymer component to display a count or a tiny label.
         },
 
         /**
-         * Set the background color. The default value is fuschia.
+         * Sets the background color.
          *
          * @attribute bgc
-         * @type string
+         * @type {String}
          * @default #E91E63 (fuschia)
          */
         bgc: {
@@ -198,10 +199,10 @@ A poly-badge is a pure Polymer component to display a count or a tiny label.
         },
 
         /**
-         * Set the font-size to 0.7em.
+         * Sets the font-size to 0.7em.
          *
          * @attribute xs
-         * @type boolean
+         * @type {Boolean}
          * @default false
          */
         xs: {
@@ -210,10 +211,10 @@ A poly-badge is a pure Polymer component to display a count or a tiny label.
         },
 
         /**
-         * Set the font-size to 0.8em.
+         * Sets the font-size to 0.8em.
          *
          * @attribute s
-         * @type boolean
+         * @type {Boolean}
          * @default false
          */
         s: {
@@ -222,10 +223,10 @@ A poly-badge is a pure Polymer component to display a count or a tiny label.
         },
 
         /**
-         * Set the font-size to 1.2em.
+         * Sets the font-size to 1.2em.
          *
          * @attribute l
-         * @type boolean
+         * @type {Boolean}
          * @default false
          */
         l: {
@@ -234,7 +235,7 @@ A poly-badge is a pure Polymer component to display a count or a tiny label.
         },
 
         /**
-         * Set the font-size to 1.4em.
+         * Sets the font-size to 1.4em.
          *
          * @attribute xl
          * @type boolean
@@ -246,9 +247,9 @@ A poly-badge is a pure Polymer component to display a count or a tiny label.
         },
 
         /**
-         * label used for info, warning and error markers.
+         * Label used for info, warning and error markers.
          *
-         * @type String
+         * @type {String}
          */
         _label: {
           type: String,
@@ -256,9 +257,9 @@ A poly-badge is a pure Polymer component to display a count or a tiny label.
         },
 
         /**
-         * Defines if the badge is a marker or not.
+         * Defines if the badge is a marker.
          *
-         * @type Boolean
+         * @type {Boolean}
          */
         _isMarker: {
           type: Boolean,
@@ -266,9 +267,9 @@ A poly-badge is a pure Polymer component to display a count or a tiny label.
         },
 
         /**
-         * Classes names to apply on the badge.
+         * Classes names set.
          *
-         * @type String
+         * @type {String}
          */
         _classes: {
           type: String,
@@ -278,107 +279,74 @@ A poly-badge is a pure Polymer component to display a count or a tiny label.
       },
 
       ready: function() {
-        // Initializes the text and background colors.
         this.setColor(this.color || white);
         this.setBgc(this.bgc || fuschia);
       },
 
       attached: function() {
         this.async(function() {
-          // Defines if the badge style, wide or not.
-          this.wide = this.wide || this.clientWidth >
-            24;
+          /* Defines if the badge style, wide or not. */
+          this.wide = this.wide || this.clientWidth > 24;
 
-          // Initializes the min-width.
+          /* Initializes the min-width. */
           if (this.elevation) {
             this.$.shadow.style.setProperty(
-              'min-width', this.clientHeight +
-              'px');
+              'min-width',
+              this.clientHeight + 'px'
+            );
           } else {
-            this.style.setProperty('min-width',
-              this.clientHeight + 'px');
+            this.style.setProperty('min-width', this.clientHeight + 'px');
           }
         }, 1);
       },
 
       /**
-       * Set the badge text color. This should be used after element
+       * Sets the badge text color. This should be used after element
        * creation instead of setting the `color` property directly.
        *
        * @method setColor
-       * @param  string newColor
+       * @param  {String} newColor
        */
       setColor: function(newColor) {
         if (!this._isMarker) {
-          this.$.shadow.style.setProperty('color',
-            newColor);
+          this.$.shadow.style.setProperty('color', newColor);
         }
       },
 
       /**
-       * Set the badge background color. This should be used after element
+       * Sets the badge background color. This should be used after element
        * creation instead of setting the `bgc` property directly.
        *
        * @method setBgc
-       * @param  string newColor
+       * @param  {String} newColor
        */
       setBgc: function(newColor) {
         if (!this._isMarker) {
-          this.$.shadow.style.setProperty(
-            'background-color', newColor);
+          this.$.shadow.style.setProperty('background-color', newColor);
         }
       },
 
       /**
-       * Set the z-depth of the shadow. This should be used after element
+       * Sets the z-depth of the shadow. This should be used after element
        * creation instead of setting the `elevation` property directly.
        *
        * @method setElevation
-       * @param  number newLevel
+       * @param  {Number} newLevel
        */
       setElevation: function(newLevel) {
         this.$.shadow.elevation = newLevel;
       },
 
-      /**
-       * Define the marker label.
-       *
-       * @param  Boolean info
-       * @param  Boolean warning
-       * @param  Boolean error
-       * @param  Boolean xs
-       * @return String  a label according to the type and size of the marker.
-       */
       _computeLabel: function(info, warning, error, xs) {
         return error && (xs ? "!!!" : "ERROR") ||
           warning && (xs ? "!" : "WARNING") ||
           info && (xs ? "i" : "INFO");
       },
 
-      /**
-       * Define if the poly-badge is a marker.
-       *
-       * @param  String label set instead of the content
-       * @return Boolean true if a  label exists, false otherwise
-       */
       _isAMarker: function(label) {
         return label ? true : false;
       },
 
-      /**
-       * Compute the classes to apply on the poly-badge.
-       *
-       * @param  Boolean wide
-       * @param  Boolean info
-       * @param  Boolean warning
-       * @param  Boolean error
-       * @param  Number elevation
-       * @param  Boolean xl
-       * @param  Boolean l
-       * @param  Boolean s
-       * @param  Boolean xs
-       * @return String classes to set on the paper-material
-       */
       _computeClasses: function(wide, info, warning, error, elevation,
         xl, l, s, xs) {
         return (wide ? ' wide' : '')
