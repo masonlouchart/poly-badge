@@ -1,0 +1,310 @@
+<!doctype html>
+<!--
+@license
+Copyright 2015 See the CONTRIBUTORS.txt file
+
+    ("http://LM450N.github.io/poly-badge/components/poly-badge/CONTRIBUTORS.txt")
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <title>poly-badge Demo</title>
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../poly-badge.html">
+  <link rel="import" type="css" href="../../iron-flex-layout/classes/iron-flex-layout.html">
+  <style type="text/css">
+    body {
+      font-family: Roboto, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      margin: auto;
+      margin-bottom: 50px;
+      background: whitesmoke;
+    }
+    p {
+      text-align: justify;
+      max-width: 900px;
+    }
+    h1, h2, h3 {
+      color: hotpink;
+      margin-top: 40px;
+    }
+    thead {
+      font-weight: bold;
+      background: lightgray;
+      text-align: center;
+    }
+    tbody tr, li {
+      line-height: 30px;
+    }
+    table td {
+      padding: 5px;
+    }
+  </style>
+</head>
+<body>
+<div class="layout horizontal center-justified">
+<div>
+
+  <h1>A<poly-badge elevation="1">poly-badge</poly-badge> looks like this</h1>
+
+  <p>
+    The badge width is autoscaled when the content width exceed 24px. The badge
+    is rounded under 24px, it's ideal for little numbers or three letters.
+    Otherwise, the badge acquires a wide style. You can also force the wide
+    style. <b>Does not support data-binding anymore</b>.
+  </p>
+
+  <h2>Examples of badges</h2>
+  <ul>
+    <li>You have received
+      <poly-badge>5</poly-badge>
+      emails.
+    </li>
+    <li>You have received
+      <poly-badge>42</poly-badge>
+      emails.
+    </li>
+    <li>You have received
+      <poly-badge>1234</poly-badge>
+      emails this morning...yep.
+    </li>
+    <li>The wide style can
+      <poly-badge wide>be</poly-badge>
+      forced, even
+      <poly-badge wide>if</poly-badge>
+      <poly-badge>it</poly-badge>
+      <poly-badge wide>is</poly-badge>
+      <poly-badge>not</poly-badge>
+      necessary.
+    </li>
+  </ul>
+
+  <h2>Available attributes</h2>
+  <table>
+    <thead>
+    <tr>
+      <td>Attribute</td>
+      <td>Value</td>
+      <td>Result</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>elevation</td>
+      <td>1</td>
+      <td>add a paper-material with elevation of
+        <poly-badge elevation="1">1</poly-badge>
+      </td>
+    </tr>
+    <tr>
+      <td>elevation</td>
+      <td>2</td>
+      <td>add a paper-material with elevation of
+        <poly-badge elevation="2">2</poly-badge>
+      </td>
+    </tr>
+    <tr>
+      <td>elevation</td>
+      <td>3</td>
+      <td>add a paper-material with elevation of
+        <poly-badge elevation="3">3</poly-badge>
+      </td>
+    </tr>
+    <tr>
+      <td>elevation</td>
+      <td>4</td>
+      <td>add a paper-material with elevation of
+        <poly-badge elevation="4">4</poly-badge>
+      </td>
+    </tr>
+    <tr>
+      <td>elevation</td>
+      <td>5</td>
+      <td>add a paper-material with elevation of
+        <poly-badge elevation="5">5</poly-badge>
+      </td>
+    </tr>
+    <tr>
+      <td>wide</td>
+      <td>true</td>
+      <td>to force the wide style on
+        <poly-badge wide>a</poly-badge>
+        little badge
+      </td>
+    </tr>
+    <tr>
+      <td>info</td>
+      <td>true</td>
+      <td>the marker
+        <poly-badge info>hidden</poly-badge>
+        ignores his content
+      </td>
+    </tr>
+    <tr>
+      <td>warning</td>
+      <td>true</td>
+      <td>the marker
+        <poly-badge warning>hidden</poly-badge>
+        ignores his content
+      </td>
+    </tr>
+    <tr>
+      <td>error</td>
+      <td>true</td>
+      <td>the marker
+        <poly-badge error>hidden</poly-badge>
+        ignores his content
+      </td>
+    </tr>
+    <tr>
+      <td>color</td>
+      <td>black</td>
+      <td>the text
+        <poly-badge color="black">color</poly-badge>
+        is black
+      </td>
+    </tr>
+    <tr>
+      <td>bgc</td>
+      <td>#0034FF</td>
+      <td>the
+        <poly-badge bgc="#0034FF">background</poly-badge>
+        color is #0034FF
+      </td>
+    </tr>
+    <tr>
+      <td>xs</td>
+      <td>true</td>
+      <td>set the size to<poly-badge xs>0.7</poly-badge>em</td>
+    </tr>
+    <tr>
+      <td>s</td>
+      <td>true</td>
+      <td>set the size to<poly-badge s>0.8</poly-badge>em</td>
+    </tr>
+    <tr>
+      <td>l</td>
+      <td>true</td>
+      <td>set the size to<poly-badge l>1.2</poly-badge>em</td>
+    </tr>
+    <tr>
+      <td>xl</td>
+      <td>true</td>
+      <td>set the size to<poly-badge xl>1.4</poly-badge>em</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h2>Combinations are possibles</h2>
+
+  <ul>
+    <li>
+      <poly-badge info></poly-badge>+ elevation of
+      <poly-badge elevation="1">1</poly-badge>=
+      <poly-badge info elevation="1"></poly-badge>
+    </li>
+    <li>
+      <poly-badge warning></poly-badge>+ elevation of
+      <poly-badge elevation="2">2</poly-badge>=
+      <poly-badge warning elevation="2"></poly-badge>
+    </li>
+    <li>
+      <poly-badge error></poly-badge>+ elevation of
+      <poly-badge elevation="3">3</poly-badge>=
+      <poly-badge error elevation="3"></poly-badge>
+    </li>
+    <li>
+      elevation of
+      <poly-badge elevation="5">5</poly-badge>+ the color
+      <poly-badge color="#0037ff">#0037ff</poly-badge>+ and a bgc set to
+      <poly-badge bgc="#37ff00">#37ff00</poly-badge>=
+      <poly-badge color="#0037ff" bgc="#37ff00" elevation="5">It's too SwAgGy !!!</poly-badge>
+    </li>
+    <li>
+      color
+      <poly-badge color="black">black</poly-badge>+ bgc set to
+      <poly-badge bgc="#37ff00">#37ff00</poly-badge>+
+      <poly-badge info></poly-badge>= nope, you can't overwrite the marker
+      <poly-badge color="black" bgc="#37ff00" info></poly-badge>
+    </li>
+    <li>
+      color
+      <poly-badge color="black">black</poly-badge>+ bgc set to
+      <poly-badge bgc="#37ff00">#37ff00</poly-badge>+
+      <poly-badge warning></poly-badge>= nope, you can't overwrite the marker
+      <poly-badge color="black" bgc="#37ff00" warning></poly-badge>
+    </li>
+    <li>
+      color
+      <poly-badge color="black">black</poly-badge>+ bgc set to
+      <poly-badge bgc="#37ff00">#37ff00</poly-badge>+
+      <poly-badge error></poly-badge>= nope, you can't overwrite the marker
+      <poly-badge color="black" bgc="#37ff00" error></poly-badge>
+    </li>
+    <li>
+      size
+      <poly-badge xs>xs</poly-badge>+
+      <poly-badge info></poly-badge>= a very tiny marker
+      <poly-badge xs info></poly-badge>
+    </li>
+    <li>
+      size
+      <poly-badge xs>xs</poly-badge>+
+      <poly-badge warning></poly-badge>= a very tiny marker
+      <poly-badge xs warning></poly-badge>
+    </li>
+    <li>
+      size
+      <poly-badge xs>xs</poly-badge>+
+      <poly-badge error></poly-badge>= a very tiny marker
+      <poly-badge xs error></poly-badge>
+    </li>
+    <li>
+      size
+      <poly-badge xs>xs</poly-badge>+
+      style <poly-badge wide>wide</poly-badge>+
+      <poly-badge info></poly-badge>= this very tiny marker
+      <poly-badge xs info wide></poly-badge>
+    </li>
+    <li>
+      the priority size between
+      <poly-badge xs>xs</poly-badge>,
+      <poly-badge s>s</poly-badge>,
+      <poly-badge l>l</poly-badge>and
+      <poly-badge xl>xl</poly-badge>is the
+      <poly-badge xs s l xl>BIG</poly-badge> one!
+    </li>
+  </ul>
+
+  <h3>Initial author</h3>
+  Mason Louchart - is on
+  <a href="https://github.com/LM450N">GitHub</a>,
+  <a href="https://twitter.com/LM450N">Twitter</a> and has also a
+  <a href="http://louchart-mason.fr/">site</a>.
+
+</div>
+</div>
+<script>
+  var changeelevation = function (value) {
+    document.querySelector('#example').setElevation(parseInt(value));
+  }
+  var changeColor = function (color) {
+    document.querySelector('#example').setColor(color);
+  }
+  var changeBgc = function (color) {
+    document.querySelector('#example').setBgc(color);
+  }
+</script>
+</body>
+</html>

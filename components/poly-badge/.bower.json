@@ -1,0 +1,49 @@
+{
+  "name": "poly-badge",
+  "authors": [
+    "Mason Louchart"
+  ],
+  "contributors": [
+    "http://LM450N.github.io/poly-badge/components/poly-badge/CONTRIBUTORS.txt"
+  ],
+  "description": "A poly-badge is a pure Polymer component to display a count or a tiny label.",
+  "license": "http://LM450N.github.io/poly-badge/components/poly-badge/LICENSE.txt",
+  "homepage": "http://LM450N.github.io/poly-badge/components/poly-badge/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LM450N/poly-badge.git"
+  },
+  "keywords": [
+    "seed",
+    "polymer",
+    "web-component",
+    "web-components",
+    "badge"
+  ],
+  "main": "poly-badge.html",
+  "ignore": [
+    "/.*",
+    "/node_modules",
+    "/bower_components",
+    "/test/",
+    "/demo/"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.0.0",
+    "paper-material": "PolymerElements/paper-material#^1.0.0"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "web-component-tester": "*"
+  },
+  "_release": "1d7e055af5",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "1d7e055af55877880de4a819d60a51c2bf6457ca"
+  },
+  "_source": "git://github.com/LM450N/poly-badge.git",
+  "_target": "master",
+  "_originalSource": "LM450N/poly-badge",
+  "_direct": true
+}

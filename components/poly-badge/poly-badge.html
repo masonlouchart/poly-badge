@@ -1,0 +1,366 @@
+<!--
+@license
+Copyright 2015 See the CONTRIBUTORS.txt file
+
+    ("http://LM450N.github.io/poly-badge/components/poly-badge/CONTRIBUTORS.txt")
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-material/paper-material.html">
+
+<!--
+A poly-badge is a pure Polymer component to display a count or a tiny label.
+
+##### Examples
+
+    <poly-badge>5</poly-badge>
+    <poly-badge>Hello</poly-badge>
+    <poly-badge wide>42</poly-badge>
+    <poly-badge elevation="1">Shadow is added</poly-badge>
+    <poly-badge info></poly-badge>
+    <poly-badge color="white" bgc="black">Black & White</poly-badge>
+
+@element poly-badge
+@demo demo/index.html
+@demo https://LM450N.github.io/poly-badge/components/poly-badge/demo/
+@blurb A pure Polymer component to display a count or a tiny label.
+@homepage https://LM450N.github.io/poly-badge/components/poly-badge/
+-->
+<dom-module id="poly-badge">
+  <style>
+  :host {
+    display: inline-block;
+    line-height: initial;
+    text-align: center;
+    color: #fff;
+    margin: 0 2px;
+  }
+
+  paper-material {
+    border-radius: 50%;
+    padding: 3px 0;
+  }
+
+  .wide {
+    border-radius: 3px;
+    padding: 2px 4px;
+  }
+
+  .info {
+    background-color: #03A9F4;
+  }
+
+  .warning {
+    background-color: #FF9800;
+  }
+
+  .error {
+    background-color: #F44336;
+  }
+
+  .XS {
+    font-size: 0.7em;
+  }
+
+  .S {
+    font-size: 0.8em;
+  }
+
+  .L {
+    font-size: 1.2em;
+  }
+
+  .XL {
+    font-size: 1.4em;
+  }
+  </style>
+
+  <template>
+    <paper-material id="shadow" elevation="[[elevation]]" class$="{{_classes}}"
+      animated>
+      <template is="dom-if" if="[[_isMarker]]"><span>{{_label}}</span></template>
+      <template is="dom-if" if="[[!_isMarker]]"><content></content></template>
+    </paper-material>
+  </template>
+
+  <script>
+  (function() {
+
+    /**
+     * Defaults colors.
+     * @type {String}
+     */
+    var fuschia = '#E91E63',
+      white = '#ffffff';
+
+    Polymer({
+
+      is: 'poly-badge',
+
+      properties: {
+        /**
+         * Forces the badge to be "large".
+         *
+         * @attribute wide
+         * @type {Boolean}
+         * @default false
+         */
+        wide: {
+          type: Boolean,
+          value: false
+        },
+
+        /**
+         * The elevation level of the shadow, from 0-5. Setting this property
+         * after element creation has no effect. Use setElevation() instead.
+         *
+         * @attribute elevation
+         * @type {Number}
+         * @default 0
+         */
+        elevation: {
+          type: Number,
+          value: 0
+        },
+
+        /**
+         * Sets the badge like an info marker. Small font size, white on
+         * background light-blue.
+         *
+         * @attribute info
+         * @type {Boolean}
+         * @default false
+         */
+        info: {
+          type: Boolean,
+          value: false
+        },
+
+        /**
+         * Sets the badge like a warning marker. Small font size, white on
+         * background light-blue.
+         *
+         * @attribute warning
+         * @type {Boolean}
+         * @default false
+         */
+        warning: {
+          type: Boolean,
+          value: false
+        },
+
+        /**
+         * Sets the badge like an error marker. Small font size, white on
+         * background light-blue.
+         *
+         * @attribute error
+         * @type {Boolean}
+         * @default false
+         */
+        error: {
+          type: Boolean,
+          value: false
+        },
+
+        /**
+         * Sets the text color.
+         *
+         * @attribute color
+         * @type {String}
+         * @default #fff (white)
+         */
+        color: {
+          type: String,
+          value: '#ffffff'
+        },
+
+        /**
+         * Sets the background color.
+         *
+         * @attribute bgc
+         * @type {String}
+         * @default #E91E63 (fuschia)
+         */
+        bgc: {
+          type: String,
+          value: '#E91E63'
+        },
+
+        /**
+         * Sets the font-size to 0.7em.
+         *
+         * @attribute xs
+         * @type {Boolean}
+         * @default false
+         */
+        xs: {
+          type: Boolean,
+          value: false
+        },
+
+        /**
+         * Sets the font-size to 0.8em.
+         *
+         * @attribute s
+         * @type {Boolean}
+         * @default false
+         */
+        s: {
+          type: Boolean,
+          value: false
+        },
+
+        /**
+         * Sets the font-size to 1.2em.
+         *
+         * @attribute l
+         * @type {Boolean}
+         * @default false
+         */
+        l: {
+          type: Boolean,
+          value: false
+        },
+
+        /**
+         * Sets the font-size to 1.4em.
+         *
+         * @attribute xl
+         * @type boolean
+         * @default false
+         */
+        xl: {
+          type: Boolean,
+          value: false
+        },
+
+        /**
+         * Label used for info, warning and error markers.
+         *
+         * @type {String}
+         */
+        _label: {
+          type: String,
+          computed: '_computeLabel(info, warning, error, xs)'
+        },
+
+        /**
+         * Defines if the badge is a marker.
+         *
+         * @type {Boolean}
+         */
+        _isMarker: {
+          type: Boolean,
+          computed: '_isAMarker(_label)'
+        },
+
+        /**
+         * Classes names set.
+         *
+         * @type {String}
+         */
+        _classes: {
+          type: String,
+          computed: '_computeClasses(wide, info, warning, error, elevation,\
+              xl, l, s, xs)'
+        }
+      },
+
+      ready: function() {
+        this.setColor(this.color || white);
+        this.setBgc(this.bgc || fuschia);
+      },
+
+      attached: function() {
+        this.async(function() {
+          /* Defines if the badge style, wide or not. */
+          this.wide = this.wide || this.clientWidth > 24;
+
+          /* Initializes the min-width. */
+          if (this.elevation) {
+            this.$.shadow.style.setProperty(
+              'min-width',
+              this.clientHeight + 'px'
+            );
+          } else {
+            this.style.setProperty('min-width', this.clientHeight + 'px');
+          }
+        }, 1);
+      },
+
+      /**
+       * Sets the badge text color. This should be used after element
+       * creation instead of setting the `color` property directly.
+       *
+       * @method setColor
+       * @param  {String} newColor
+       */
+      setColor: function(newColor) {
+        if (!this._isMarker) {
+          this.$.shadow.style.setProperty('color', newColor);
+        }
+      },
+
+      /**
+       * Sets the badge background color. This should be used after element
+       * creation instead of setting the `bgc` property directly.
+       *
+       * @method setBgc
+       * @param  {String} newColor
+       */
+      setBgc: function(newColor) {
+        if (!this._isMarker) {
+          this.$.shadow.style.setProperty('background-color', newColor);
+        }
+      },
+
+      /**
+       * Sets the z-depth of the shadow. This should be used after element
+       * creation instead of setting the `elevation` property directly.
+       *
+       * @method setElevation
+       * @param  {Number} newLevel
+       */
+      setElevation: function(newLevel) {
+        this.$.shadow.elevation = newLevel;
+      },
+
+      _computeLabel: function(info, warning, error, xs) {
+        return error && (xs ? "!!!" : "ERROR") ||
+          warning && (xs ? "!" : "WARNING") ||
+          info && (xs ? "i" : "INFO");
+      },
+
+      _isAMarker: function(label) {
+        return label ? true : false;
+      },
+
+      _computeClasses: function(wide, info, warning, error, elevation,
+        xl, l, s, xs) {
+        return (wide ? ' wide' : '')
+          + (info ?' info' : '')
+          + (warning ? ' warning' :'')
+          + (error ? ' error' : '')
+          + (elevation ? ' elevation' : '')
+          + (xl ?' XL' : '')
+          + (l ? ' L' : '')
+          + (s ? ' S' :'')
+          + (xs ? ' XS' : '');
+      }
+
+    })
+  })();
+  </script>
+</dom-module>
