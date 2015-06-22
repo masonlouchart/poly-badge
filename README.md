@@ -69,7 +69,7 @@ _Don't forget add your name into the [CONTRIBUTORS.txt][contributors] file._
 [Apache License 2.0][license]
 
 <!-- links -->
-[polymer_page]: https://polymer-project.appspot.com/0.5/
+[polymer_page]: https://www.polymer-project.org/1.0/
 [profile_page]: https://github.com/LM450N
 [component_page]: http://louchart-mason.fr/poly-badge
 [contributors]: https://github.com/LM450N/poly-badge/blob/master/CONTRIBUTORS.txt
